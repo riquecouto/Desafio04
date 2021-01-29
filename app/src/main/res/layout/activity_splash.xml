@@ -13,5 +13,5 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/splash_description"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/splashFirebase" />
+        app:srcCompat="@drawable/splash_firebase" />
 </androidx.constraintlayout.widget.ConstraintLayout>
