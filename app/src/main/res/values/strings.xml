@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Desafio04</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="chkbox_remember">Remember</string>
+    <string name="action_log_in">LOG IN</string>
+    <string name="create_account">Create account</string>
+    <string name="splash_description">Splash</string>
+    <string name="prompt_name">Name</string>
+    <string name="prompt_password_repeat">Repeat password</string>
+    <string name="action_save">Create account</string>
+    <string name="created_at">Created at</string>
+    <string name="description">Description</string>
+    <string name="action_save_game">Save Game</string>
 </resources>
