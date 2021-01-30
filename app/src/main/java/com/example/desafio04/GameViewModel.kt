@@ -1,19 +1,16 @@
 package com.example.desafio04
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
-class GameViewModel() : ViewModel() {
+class GameViewModel : ViewModel() {
 
     var gamesList = MutableLiveData<ArrayList<Games>>()
-
-    val user = hashMapOf(
-        "first" to "Ada",
-        "last" to "Lovelace",
-        "born" to 1815
-    )
-
+    var urlImage: MutableLiveData<String> = storage.imgURL
 
     fun sendGame(game: Games) {
         db.collection("games")
@@ -43,6 +40,12 @@ class GameViewModel() : ViewModel() {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting games", exception)
             }
+    }
+
+    fun uploadImage(data: Intent, location: String) {
+        viewModelScope.launch {
+            storage.uploadImg(data, location)
+        }
     }
 
     companion object {

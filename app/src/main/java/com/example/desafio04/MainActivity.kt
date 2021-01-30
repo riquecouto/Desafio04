@@ -2,16 +2,11 @@ package com.example.desafio04
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafio04.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity(), onClickListener {
@@ -34,15 +29,14 @@ class MainActivity : BaseActivity(), onClickListener {
         setContentView(binding.root)
         setProgressBar(binding.progressBar)
 
-
-        viewModel.sendGame(
-            Games(
-                "X-MEN",
-                2009,
-                "Mutantes",
-                "https://upload.wikimedia.org/wikipedia/pt/6/6c/God_of_War_3_capa.png"
-            )
-        )
+//        viewModel.sendGame(
+//            Games(
+//                "X-MEN",
+//                2009.toString(),
+//                "Mutantes",
+//                "https://upload.wikimedia.org/wikipedia/pt/6/6c/God_of_War_3_capa.png"
+//            )
+//        )
 
         viewModel.getGames()
 
@@ -53,8 +47,6 @@ class MainActivity : BaseActivity(), onClickListener {
 
 //        binding.rcGames.adapter = gameAdapter
         binding.rcGames.layoutManager = GridLayoutManager(this@MainActivity, 2)
-
-
         binding.fab.setOnClickListener {
             callNewGame()
         }
@@ -73,7 +65,7 @@ class MainActivity : BaseActivity(), onClickListener {
                         "title" to game.title,
                         "createDate" to game.createDate,
                         "description" to game.description,
-                        "img" to game.img
+                        "imgRef" to game.imgRef
                     )
                 )
             }
