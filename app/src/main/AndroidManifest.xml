@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Desafio04">
-
+        <activity android:name=".DetailsActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".IncludeGameActivity" />
         <activity
@@ -29,4 +29,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

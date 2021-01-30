@@ -7,13 +7,14 @@ import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafio04.databinding.ActivityMainBinding
 
-class MainActivity : BaseActivity(), View.OnClickListener {
+class MainActivity : BaseActivity(), onClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var gameAdapter: GamesAdapter
@@ -46,23 +47,37 @@ class MainActivity : BaseActivity(), View.OnClickListener {
         viewModel.getGames()
 
         viewModel.gamesList.observe(this) {
-            gameAdapter = GamesAdapter(it, View.OnClickListener {
-//                startActivity(Intent(this, GamesDetailActivity::class.java))
-            })
-            binding.rcGames.adapter = gameAdapter
-            binding.rcGames.layoutManager = GridLayoutManager(this@MainActivity,2)
+            gameAdapter = GamesAdapter(it, this)
+                    binding.rcGames.adapter = gameAdapter
         }
-    }
 
-    override fun onClick(v: View?) {
-        if (v != null) {
-            when (v.id) {
-                R.id.fab -> callNewGame()
-            }
+//        binding.rcGames.adapter = gameAdapter
+        binding.rcGames.layoutManager = GridLayoutManager(this@MainActivity, 2)
+
+
+        binding.fab.setOnClickListener {
+            callNewGame()
         }
     }
 
     private fun callNewGame() {
         startActivity(Intent(this, IncludeGameActivity::class.java))
+    }
+
+    override fun gameClick(game: Games) {
+        viewModel.gamesList.observe(this, {
+
+            val intent = Intent(this, DetailsActivity::class.java).apply {
+                putExtras(
+                    bundleOf(
+                        "title" to game.title,
+                        "createDate" to game.createDate,
+                        "description" to game.description,
+                        "img" to game.img
+                    )
+                )
+            }
+            startActivity(intent)
+        })
     }
 }

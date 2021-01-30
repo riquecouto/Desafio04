@@ -1,18 +1,16 @@
 package com.example.desafio04
 
-import android.transition.Fade
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class GamesAdapter(
     private val listGames: ArrayList<Games>,
-    val listener: View.OnClickListener
+    private val click: onClickListener
 ) : RecyclerView.Adapter<GamesAdapter.GamesViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -33,27 +31,16 @@ class GamesAdapter(
             .load(listGames[position].img)
             .into(holder.gameImg)
 
-//        holder.itemView.setOnClickListener {
-//            val manager = (holder.itemView.context as FragmentActivity).supportFragmentManager
-//            val fragment = PratosFragment(listRestaurantes[position].nome, listRestaurantes[position].imagem).apply {
-//                enterTransition = Fade()
-//                exitTransition = Fade()
-//            }
-//            manager
-//                .beginTransaction()
-//                .replace(R.id.flHomeFragment, fragment, null)
-//                .addToBackStack(null)
-//                .commit()
-//        }
-
+        holder.itemView.setOnClickListener {
+            click.gameClick(listGames[position])
+        }
     }
-
 
     override fun getItemCount(): Int {
         return listGames.size
     }
 
-    class GamesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class GamesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val gameImg: ImageView = itemView.findViewById(R.id.imgGame)
         val gameName: TextView = itemView.findViewById(R.id.txtRecyclerGameName)
         val gameYear: TextView = itemView.findViewById(R.id.txtRecyclerGameYear)
